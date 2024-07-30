@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FriendlyBank", "FriendlyBank.csproj", "{B7DB7B76-F6DB-4298-9FF8-73B2180922B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FriendlyBank", "FriendlyBank.csproj", "{B7DB7B76-F6DB-4298-9FF8-73B2180922B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "..\UnitTest\UnitTest.csproj", "{1F9AF944-1216-4062-B1CC-01F0707EEB53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{B7DB7B76-F6DB-4298-9FF8-73B2180922B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7DB7B76-F6DB-4298-9FF8-73B2180922B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7DB7B76-F6DB-4298-9FF8-73B2180922B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F9AF944-1216-4062-B1CC-01F0707EEB53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F9AF944-1216-4062-B1CC-01F0707EEB53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F9AF944-1216-4062-B1CC-01F0707EEB53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F9AF944-1216-4062-B1CC-01F0707EEB53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -24,7 +24,8 @@ namespace FriendlyBank
 
         private decimal balance_amt = 0;  // the decimal type is specifically designed for financial values
         public static decimal interest_rate;
-
+        public static decimal min_starting_amt = 1000;
+        public static decimal min_age = 18;
         public bool WithdrawFunds ( decimal transaction_amt )
         {
             if ( balance_amt < transaction_amt)
@@ -60,17 +61,7 @@ namespace FriendlyBank
 
         public static bool AccountAllowed ( decimal starting_amt, int age )
         {
-
-            if ( (starting_amt >= 10000) && (age >= 18) )
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-            // Q:  does this one-liner work?  return ( (starting_amt >= 10000) && (age >= 18) );
+            return  (starting_amt >= min_starting_amt) && (age >= min_age) ;
         }
 
     }
