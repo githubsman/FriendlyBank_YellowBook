@@ -1,6 +1,6 @@
 ﻿using System;
 
-// #MARK enumerated type    (yellow book, 79ff)
+// #MARK enumerated type       Yellow Book 4.2
 //   A user-defined data type; useful for *states*.  It's generally helpful for an object to have state.  
 //   Functionally (similar to) a drop-down menu populated from a value list that cannot be altered. 
 //  
@@ -15,7 +15,7 @@ enum AccountState
 }
 
 
-// #MARK structure    (p 82-85)
+// #MARK structure    (Yellow Book 4.3-4)
 //  A member-specific set of C# variables that will be treated as an entity which has fields.
 //  Arrays of structures are highly useful.  Each array member is an instance of the structure.  
 
@@ -24,15 +24,15 @@ enum AccountState
 //  This provides a springboard to discuss objects on p88-90. 
 
 //      Account MyNamedAccount;              <<   To use a structure      
-                                                                                          
+
 //      Account MyNamedAccount;              <<   To use a class ...    
 //      MyNamedAccount = new Account();              ... you create an instance 
 
 //  (Functionally, a structure is a table -- which is nice if you don't have a database at hand). 
 
-//  p.89:
+//  Yellow Book 4.4.1
 //  An object is an instance of a class.
-//  An object is created using the keyword 'new'.   (NB: An array is implemented as an object.)  
+//  An object is created using the keyword 'new'.   (NB: An array is implemented as an object, thus 'new'.)  
 
 struct Account
 {
