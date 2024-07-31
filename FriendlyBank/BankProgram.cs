@@ -41,7 +41,7 @@ struct Account
     public string Address;
     public int AccountNumber;
     public int Balance;
-    public int Overdraft; 
+    public int Overdraft;
 };
 
 //       ^  ^  ^  ^  ^        ^  ^  ^  
@@ -78,5 +78,3 @@ class BankProgram
         Console.WriteLine("Balance: " + a.Balance);
     }
 }
-
-

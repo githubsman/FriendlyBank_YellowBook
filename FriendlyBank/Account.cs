@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
+
+/* TODO:  add precise exceptions
+ * https://learn.microsoft.com/en-us/visualstudio/test/walkthrough-creating-and-running-unit-tests-for-managed-code?view=vs-2022
+ * */
 
 namespace FriendlyBank
 {
@@ -26,9 +31,12 @@ namespace FriendlyBank
         public static decimal interest_rate;
         public static decimal min_starting_amt = 1000;
         public static decimal min_age = 18;
-        public bool WithdrawFunds ( decimal transaction_amt )
+
+        public bool WithdrawFunds(decimal transaction_amt)
         {
-            if ( balance_amt < transaction_amt)
+            // TODO replace with try-catch
+            // TODO throw precise exceptions, ex OutOfRange
+            if (balance_amt < transaction_amt)
             {
                 return false;
             }
@@ -41,9 +49,9 @@ namespace FriendlyBank
             balance_amt += transaction_amt;
         }
 
-        public decimal GetBalance ( )
+        public decimal GetBalance()
         {
-            return balance_amt; 
+            return balance_amt;
         }
 
         //      public static decimal interest_rate;  (above)
@@ -58,10 +66,9 @@ namespace FriendlyBank
         //    (This makes obvious sense for the Main() method:  You need to be able 
         //     to start the program without first instantiating a class.)         
 
-
-        public static bool AccountAllowed ( decimal starting_amt, int age )
+        public static bool AccountAllowed(decimal starting_amt, int age)
         {
-            return  (starting_amt >= min_starting_amt) && (age >= min_age) ;
+            return (starting_amt >= min_starting_amt) && (age >= min_age);
         }
 
     }
