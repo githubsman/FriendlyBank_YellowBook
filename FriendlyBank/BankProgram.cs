@@ -1,4 +1,6 @@
-﻿using System;
+﻿/*  ENTIRE PAGE COMMENTED OUT 
+ 
+using System;
 
 // #MARK enumerated type       Yellow Book 4.2
 //   A user-defined data type; useful for *states*.  It's generally helpful for an object to have state.  
@@ -33,6 +35,8 @@ enum AccountState
 //  Yellow Book 4.4.1
 //  An object is an instance of a class.
 //  An object is created using the keyword 'new'.   (NB: An array is implemented as an object, thus 'new'.)  
+
+//  YB 4.7   The keyword 'new' calls a constructor method in that class.  Every class must have a constructor method.  
 
 struct Account
 {
@@ -78,3 +82,5 @@ class BankProgram
         Console.WriteLine("Balance: " + a.Balance);
     }
 }
+
+ENTIRE PAGE COMMENTED OUT     */

@@ -13,8 +13,17 @@ namespace FriendlyBank
 {
     public class Account
     {
-        // #MARK This is a variable stored in the class;
-        //  known in this context as a *member* or a *property*. 
+        // #MARK Variables stored in the class may be referred to as *members* or a *properties*. 
+
+        //  See below about static properties. 
+        public static decimal interest_rate;
+        public static decimal min_starting_amt = 1000;
+        public static decimal min_age = 18;
+
+        private string account_name;
+        private string account_address;
+        private decimal balance_amt = 0;  // the decimal type is specifically designed for financial values
+
 
         //  For a bank balance_amt, *defensive programming" is required.
         //
@@ -30,10 +39,24 @@ namespace FriendlyBank
         // TODO Replace if() with  try-catch{}
         // TODO Replace 'return false' with exceptions, ex OutOfRange
 
-        private decimal balance_amt = 0;  // the decimal type is specifically designed for financial values
-        public static decimal interest_rate;
-        public static decimal min_starting_amt = 1000;
-        public static decimal min_age = 18;
+
+        //  #MARK Constructor (YB 4.7) 
+        public Account(string inName, string inAddress, decimal inBalance)        
+        {
+            // A constructor cannot throw a failure.
+            // So data validation must be achieved using exceptions.  YB 4.7.5
+            account_name = inName;
+            account_address = inAddress;
+            balance_amt = inBalance;
+        }
+        public Account(string inName, string inAddress) :                         //  #MARK Constructor, overloaded 
+            this(inName, inAddress, 0)
+        {     // #MARK 'this' means "another constructor in this class".   YB 4.7.4
+              // In this case, the this() statement has done all that is needed.  So the body is empty.
+        }
+        public Account(string inName) :                        
+            this(inName, "unknown", 0)
+        { }   
 
         public bool WithdrawFunds(decimal transaction_amt)
         {
@@ -60,12 +83,15 @@ namespace FriendlyBank
         //  #MARK a *static* property is a member of the class, BUT it is not a
         //          a member of an instance of the class.   Yellow Book 4.6.1. 
         //      The effect for interest_rate is to 
-        //          (1) declare a global constant, and
+        //          (1) declare a global constant (YB 4.6.3), and
         //          (2) make it globally available regardless of whether the class has been instantiated.  
         //      "Static" does NOT mean immutability (although stability is implied in (1) above).  
-        //  Below is a static method that lets us check eligibility for a *potential* bank customer - no account instantiated! 
+        //  Below is a static method that lets us check eligibility for a *potential* bank customer.
+        //    In other words, it can execute without an instance.  
         //    (This makes obvious sense for the Main() method:  You need to be able 
-        //     to start the program without first instantiating a class.)         
+        //     to start the program without first instantiating a class.
+        //     It's also indispensible for libraries where a function should "just work".)
+        //  A static method can only consume static class members (again: interest_rate). YB 4.6.3.
 
         public static bool AccountAllowed(decimal starting_amt, int age)
         {

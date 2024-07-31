@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 // THIS IS PROLLY A TEMPORARY BIT OF CODE.   Yellow Book 4.5.2. 
-//  The file BankProgram.cs should be reinstated to handle the Main() method.
+//  The file BankProgram.cs is currently commented out; it should be reinstated to handle the Main() method.
 
 namespace FriendlyBank
 {
@@ -15,7 +15,7 @@ namespace FriendlyBank
         {
 
             Account RobsAccount;
-            RobsAccount = new Account();
+            RobsAccount = new Account("Rob", "123 Gingham St", 100000);
 
 
             if ( RobsAccount.WithdrawFunds (5) ) 
