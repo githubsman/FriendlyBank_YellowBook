@@ -27,6 +27,9 @@ namespace FriendlyBank
         //  A change to the balance_amt can only be made by means of the class method; for example:
         //         > RobsAccount.WithdrawFunds (5)              ... #MARK Security is achieved through encapsulation.  
 
+        // TODO Replace if() with  try-catch{}
+        // TODO Replace 'return false' with exceptions, ex OutOfRange
+
         private decimal balance_amt = 0;  // the decimal type is specifically designed for financial values
         public static decimal interest_rate;
         public static decimal min_starting_amt = 1000;
@@ -34,8 +37,6 @@ namespace FriendlyBank
 
         public bool WithdrawFunds(decimal transaction_amt)
         {
-            // TODO replace with try-catch
-            // TODO throw precise exceptions, ex OutOfRange
             if (balance_amt < transaction_amt)
             {
                 return false;
