@@ -41,21 +41,35 @@ namespace FriendlyBank
 
 
         //  #MARK Constructor (YB 4.7) 
-        public Account(string inName, string inAddress, decimal inBalance)        
+        public Account(string inName, string inAddress, int inAge, decimal inBalance)        
         {
-            // A constructor cannot throw a failure.
-            // So data validation must be achieved using exceptions.  YB 4.7.5
+            // A constructor cannot throw a failure.  Data validation using exceptions is necessary.  YB 4.7.5
+
+            string errorMessage = "";
+
+            if (AccountAllowed(inBalance, inAge)==false)
+            {
+                errorMessage = errorMessage + "Minimal eligibility not met: " + inAge + ", " + inBalance;
+            }
+
+            if (errorMessage != "")
+            {
+                throw new Exception("Account construction failed: " + errorMessage);
+            }
+
             account_name = inName;
             account_address = inAddress;
             balance_amt = inBalance;
         }
+
         public Account(string inName, string inAddress) :                         //  #MARK Constructor, overloaded 
-            this(inName, inAddress, 0)
+            this(inName, inAddress, 42, 1000)
         {     // #MARK 'this' means "another constructor in this class".   YB 4.7.4
-              // In this case, the this() statement has done all that is needed.  So the body is empty.
+              //    In this case, this() has done all that is needed.  So the body is empty.
         }
-        public Account(string inName) :                        
-            this(inName, "unknown", 0)
+
+        public Account(int inAge, decimal inBalance) :                        
+            this("unknown", "unknown", inAge, inBalance)
         { }   
 
         public bool WithdrawFunds(decimal transaction_amt)
@@ -93,9 +107,9 @@ namespace FriendlyBank
         //     It's also indispensible for libraries where a function should "just work".)
         //  A static method can only consume static class members (again: interest_rate). YB 4.6.3.
 
-        public static bool AccountAllowed(decimal starting_amt, int age)
+        public static bool AccountAllowed(decimal transaction_amt, int age)
         {
-            return (starting_amt >= min_starting_amt) && (age >= min_age);
+            return (transaction_amt >= min_starting_amt) && (age >= min_age);
         }
 
     }

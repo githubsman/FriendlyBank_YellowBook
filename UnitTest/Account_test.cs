@@ -35,8 +35,8 @@ namespace UnitTest
         public void Test_GetBalance()
         {
             // Arrange
-            decimal test_amt = 0;
-            Account test = new Account();
+            decimal test_amt = 1050;
+            Account test = new Account("Testy Customer", "Address", 20, test_amt);
 
             // Act and Assert
             Assert.AreEqual(test_amt, test.GetBalance());
@@ -46,8 +46,8 @@ namespace UnitTest
         public void Test_WithdrawFunds_good()
         {
             // Arrange
-            decimal test_amt = 50;
-            Account test = new Account();
+            decimal test_amt = 1050;
+            Account test = new Account("Testy Customer", "Address", 20, test_amt);
             test.PayInFunds(test_amt);
 
             // Act and Assert
@@ -58,9 +58,8 @@ namespace UnitTest
         public void Test_WithdrawFunds_bad_negative_bal()
         {
             // Arrange
-            decimal test_amt = 50;
-            Account test = new Account();
-            test.PayInFunds(test_amt);
+            decimal test_amt = 1050;
+            Account test = new Account("Testy Customer", "Address", 20, test_amt);
 
             // Act and Assert
             Assert.IsFalse(test.WithdrawFunds(test_amt + 1));
@@ -70,14 +69,14 @@ namespace UnitTest
         public void Test_PayInFunds_good()
         {
             // Arrange
-            decimal test_amt = 50;
-            Account test = new Account();
+            decimal test_amt = 1150;
+            Account test = new Account("Testy Customer", "Address", 42, test_amt);
 
             // Act
             test.PayInFunds(test_amt);
 
             // Assert
-            Assert.AreEqual(test_amt, test.GetBalance());
+            Assert.AreEqual(test.GetBalance(), test_amt * 2);
         }
         
         [TestMethod]
@@ -88,7 +87,7 @@ namespace UnitTest
             int test_age = 20;
 
             // Act and Assert
-            Assert.IsTrue(Account.AccountAllowed(test_amt, test_age));
+            Assert.IsTrue(Account.AccountAllowed(age: test_age, transaction_amt: test_amt));
         }
 
         [TestMethod]
@@ -98,8 +97,8 @@ namespace UnitTest
             decimal test_amt = 5000;
             int test_age = 16;
 
-            // Act and Assert
-            Assert.IsFalse(Account.AccountAllowed(test_amt, test_age));
+            // Act and Assert      //#MARK named parameters, ex (transaction_amt: test_amt)
+            Assert.IsFalse(Account.AccountAllowed(age: test_age, transaction_amt: test_amt));
         }
 
         [TestMethod]
