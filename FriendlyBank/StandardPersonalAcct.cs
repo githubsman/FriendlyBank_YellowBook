@@ -19,7 +19,7 @@ namespace FriendlyBank
         decimal GetBalance();
     }
     
-    public class CustomerAccount : ICustomerAccount
+    public class StandardPersonalAcct : ICustomerAccount
     {
         // #MARK Variables stored in the class may be referred to as *members* or a *properties*. 
 
@@ -50,7 +50,7 @@ namespace FriendlyBank
 
         //  #MARK Constructor (YB 4.7) 
         
-        public CustomerAccount(string inName, string inAddress, int inAge, decimal inBalance)        
+        public StandardPersonalAcct(string inName, string inAddress, int inAge, decimal inBalance)        
         {
             // A constructor cannot throw a failure.  Data validation using exceptions is necessary.  YB 4.7.5
         
@@ -63,7 +63,7 @@ namespace FriendlyBank
         
             if (errorMessage != "")
             {
-                throw new Exception("CustomerAccount construction failed: " + errorMessage);
+                throw new Exception("StandardPersonalAcct construction failed: " + errorMessage);
             }
         
             account_name = inName;
@@ -71,13 +71,13 @@ namespace FriendlyBank
             balance_amt = inBalance;
         }
         
-        public CustomerAccount(string inName, string inAddress) :                         //  #MARK Constructor, overloaded 
+        public StandardPersonalAcct(string inName, string inAddress) :                         //  #MARK Constructor, overloaded 
             this(inName, inAddress, 42, 1000)
         {     // #MARK 'this' means "another constructor in this class".   YB 4.7.4
               //    In this case, this() has done all that is needed.  So the body is empty.
         }
         
-        public CustomerAccount(int inAge, decimal inBalance) :                        
+        public StandardPersonalAcct(int inAge, decimal inBalance) :                        
             this("unknown", "unknown", inAge, inBalance)
         { }   
 
