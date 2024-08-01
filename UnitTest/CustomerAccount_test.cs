@@ -29,14 +29,14 @@ using FriendlyBank;
 namespace UnitTest
 {
     [TestClass]
-    public class Account_test
+    public class CustomerAccount_test
     {
         [TestMethod]
         public void Test_GetBalance()
         {
             // Arrange
             decimal test_amt = 1050;
-            Account test = new Account("Testy Customer", "Address", 20, test_amt);
+            ICustomerAccount test = new CustomerAccount("Testy Customer", "Address", 20, test_amt);
 
             // Act and Assert
             Assert.AreEqual(test_amt, test.GetBalance());
@@ -47,7 +47,7 @@ namespace UnitTest
         {
             // Arrange
             decimal test_amt = 1050;
-            Account test = new Account("Testy Customer", "Address", 20, test_amt);
+            ICustomerAccount test = new CustomerAccount("Testy Customer", "Address", 20, test_amt);
             test.PayInFunds(test_amt);
 
             // Act and Assert
@@ -59,7 +59,7 @@ namespace UnitTest
         {
             // Arrange
             decimal test_amt = 1050;
-            Account test = new Account("Testy Customer", "Address", 20, test_amt);
+            ICustomerAccount test = new CustomerAccount("Testy Customer", "Address", 20, test_amt);
 
             // Act and Assert
             Assert.IsFalse(test.WithdrawFunds(test_amt + 1));
@@ -70,7 +70,7 @@ namespace UnitTest
         {
             // Arrange
             decimal test_amt = 1150;
-            Account test = new Account("Testy Customer", "Address", 42, test_amt);
+            ICustomerAccount test = new CustomerAccount("Testy Customer", "Address", 42, test_amt);
 
             // Act
             test.PayInFunds(test_amt);
@@ -87,7 +87,7 @@ namespace UnitTest
             int test_age = 20;
 
             // Act and Assert
-            Assert.IsTrue(Account.AccountAllowed(age: test_age, transaction_amt: test_amt));
+            Assert.IsTrue(CustomerAccount.AccountAllowed(age: test_age, transaction_amt: test_amt));
         }
 
         [TestMethod]
@@ -98,7 +98,7 @@ namespace UnitTest
             int test_age = 16;
 
             // Act and Assert      //#MARK named parameters, ex (transaction_amt: test_amt)
-            Assert.IsFalse(Account.AccountAllowed(age: test_age, transaction_amt: test_amt));
+            Assert.IsFalse(CustomerAccount.AccountAllowed(age: test_age, transaction_amt: test_amt));
         }
 
         [TestMethod]
@@ -109,7 +109,7 @@ namespace UnitTest
             int test_age = 40;
 
             // Act and Assert
-            Assert.IsFalse(Account.AccountAllowed(test_amt, test_age));
+            Assert.IsFalse(CustomerAccount.AccountAllowed(test_amt, test_age));
         }
 
 
@@ -182,7 +182,7 @@ namespace UnitTest
         {
             // Arrange
             double beginningBalance = 11.99;
-            Account account = new Account("Ms Unite Testy", beginningBalance);
+            ICustomerAccount account = new CustomerAccount("Ms Unite Testy", beginningBalance);
 
             double transactionAmount = 4.00;
             double expectedBalance = 15.99;
@@ -195,5 +195,6 @@ namespace UnitTest
             Assert.AreEqual(expectedBalance, actual, 0.001, "Account not credited correctly");
         }
         */
+
     }
 }

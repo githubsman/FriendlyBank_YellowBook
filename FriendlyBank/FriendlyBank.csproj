@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Bank.cs" />
     <Compile Remove="BankProgram.cs" />
+    <Compile Remove="zAccount.cs" />
   </ItemGroup>
 
 </Project>
