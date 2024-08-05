@@ -17,19 +17,19 @@ namespace FriendlyBank
         public static void Main ()
         {
 
-            //ICustomerAccount RobsAccount = new StandardPersonalAcct();
-            //  CS0266  Cannot implicitly convert type 'FriendlyBank.StandardPersonalAcct' to 'FriendlyBank.ICustomerAccount'.
+            // USING CONSTRUCTORS
+            //RobsAccount = new CustomerAccount("Rob", "123 Gingham St", 42, 100000);
 
-            ICustomerAccount RobsAccount = new StandardPersonalAcct("Rob", "123 Gingham St", 42, 100000);
 
+            ICustomerAccount RobsAccount = new PersonalAccount("Rob", "123 Gingham St", 42, 100000);
 
             RobsAccount.PayInFunds(50);
             Console.WriteLine("Balance: " + RobsAccount.GetBalance());
 
+            ICustomerAccount BillysAccount = new JuniorAccount("Billy", "123 Gingham St", 11, 100);
 
-
-            // USING CONSTRUCTORS
-            //RobsAccount = new StandardPersonalAcct("Rob", "123 Gingham St", 42, 100000);
+            BillysAccount.PayInFunds(50);
+            Console.WriteLine("Balance: " + BillysAccount.GetBalance());
 
         }
 

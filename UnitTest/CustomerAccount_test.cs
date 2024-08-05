@@ -29,14 +29,55 @@ using FriendlyBank;
 namespace UnitTest
 {
     [TestClass]
-    public class StandardPersonalAcct_test
+    public class JuniorAccount_test
+    {
+
+        [TestMethod]
+        public void Test_AccountAllowed_good()
+        {
+            // Arrange
+            decimal test_amt = 1100;
+            int test_age = 11;
+
+            // Act and Assert
+            Assert.IsTrue(JuniorAccount.AccountAllowed(age: test_age, transaction_amt: test_amt));
+        }
+
+        //[TestMethod]
+        //public void Test_AccountAllowed_bad_age()
+        //{
+        //    // Arrange
+        //    decimal test_amt = 5000;
+        //    int test_age = 16;
+
+        //    // Act and Assert      //#MARK named parameters, ex (transaction_amt: test_amt)
+        //    Assert.IsFalse(JuniorAccount.AccountAllowed(age: test_age, transaction_amt: test_amt));
+        //}
+
+
+        //    [TestMethod]
+        //    public void Test_GetBalance()
+        //    {
+        //        // Arrange
+        //        decimal test_amt = 30;
+        //        ICustomerAccount test = new JuniorAccount("Testy Junior", "Address", 15, test_amt);
+
+        //        // Act and Assert
+        //        Assert.AreEqual(test_amt, test.GetBalance());
+        //    }
+    }
+
+
+
+    [TestClass]
+    public class CustomerAccount_test
     {
         [TestMethod]
         public void Test_GetBalance()
         {
             // Arrange
             decimal test_amt = 1050;
-            ICustomerAccount test = new StandardPersonalAcct("Testy Customer", "Address", 20, test_amt);
+            ICustomerAccount test = new PersonalAccount("Testy Customer", "Address", 20, test_amt);
 
             // Act and Assert
             Assert.AreEqual(test_amt, test.GetBalance());
@@ -47,7 +88,7 @@ namespace UnitTest
         {
             // Arrange
             decimal test_amt = 1050;
-            ICustomerAccount test = new StandardPersonalAcct("Testy Customer", "Address", 20, test_amt);
+            ICustomerAccount test = new PersonalAccount("Testy Customer", "Address", 20, test_amt);
             test.PayInFunds(test_amt);
 
             // Act and Assert
@@ -59,7 +100,7 @@ namespace UnitTest
         {
             // Arrange
             decimal test_amt = 1050;
-            ICustomerAccount test = new StandardPersonalAcct("Testy Customer", "Address", 20, test_amt);
+            ICustomerAccount test = new PersonalAccount("Testy Customer", "Address", 20, test_amt);
 
             // Act and Assert
             Assert.IsFalse(test.WithdrawFunds(test_amt + 1));
@@ -70,7 +111,7 @@ namespace UnitTest
         {
             // Arrange
             decimal test_amt = 1150;
-            ICustomerAccount test = new StandardPersonalAcct("Testy Customer", "Address", 42, test_amt);
+            ICustomerAccount test = new PersonalAccount("Testy Customer", "Address", 42, test_amt);
 
             // Act
             test.PayInFunds(test_amt);
@@ -87,7 +128,7 @@ namespace UnitTest
             int test_age = 20;
 
             // Act and Assert
-            Assert.IsTrue(StandardPersonalAcct.AccountAllowed(age: test_age, transaction_amt: test_amt));
+            Assert.IsTrue(CustomerAccount.AccountAllowed(age: test_age, transaction_amt: test_amt));
         }
 
         [TestMethod]
@@ -98,7 +139,7 @@ namespace UnitTest
             int test_age = 16;
 
             // Act and Assert      //#MARK named parameters, ex (transaction_amt: test_amt)
-            Assert.IsFalse(StandardPersonalAcct.AccountAllowed(age: test_age, transaction_amt: test_amt));
+            Assert.IsFalse(CustomerAccount.AccountAllowed(age: test_age, transaction_amt: test_amt));
         }
 
         [TestMethod]
@@ -109,7 +150,7 @@ namespace UnitTest
             int test_age = 40;
 
             // Act and Assert
-            Assert.IsFalse(StandardPersonalAcct.AccountAllowed(test_amt, test_age));
+            Assert.IsFalse(CustomerAccount.AccountAllowed(test_amt, test_age));
         }
 
 
@@ -182,7 +223,7 @@ namespace UnitTest
         {
             // Arrange
             double beginningBalance = 11.99;
-            ICustomerAccount account = new StandardPersonalAcct("Ms Unite Testy", beginningBalance);
+            ICustomerAccount account = new CustomerAccount("Ms Unite Testy", beginningBalance);
 
             double transactionAmount = 4.00;
             double expectedBalance = 15.99;

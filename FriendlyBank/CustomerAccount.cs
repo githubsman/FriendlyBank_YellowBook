@@ -19,18 +19,18 @@ namespace FriendlyBank
         decimal GetBalance();
     }
     
-    public class StandardPersonalAcct : ICustomerAccount
+    public abstract class CustomerAccount : ICustomerAccount
     {
         // #MARK Variables stored in the class may be referred to as *members* or a *properties*. 
 
         //  See below about static properties. 
         public static decimal interest_rate;
         public static decimal min_starting_amt = 1000;
-        public static decimal min_age = 18;
+        public static int min_age = 18;
 
-        private string account_name;
-        private string account_address;
-        private decimal balance_amt = 0;  // the decimal type is specifically designed for financial values
+        internal string account_name;
+        internal string account_address;
+        internal decimal balance_amt = 0;  // the decimal type is specifically designed for financial values
 
 
         //  For a bank balance_amt, *defensive programming" is required.
@@ -39,7 +39,9 @@ namespace FriendlyBank
         //       a property (a.k.a. variable) is private;
         //       a method member (it does something) is public, so it can be called from outside.
         //            Naming convention:  private begins lower-case, public begins upper-case. 
-        //            GOOD INTERVIEW QUESTION: Is your style convention for coding documented?  How good is compliance?  
+        //            GOOD INTERVIEW QUESTION: Is there a style convention for coding?
+        //                                  How is it documented?  What is the state of compliance?  
+        //                                  What's the biggest complaint from coders related to this?
 
         //  A change to the balance_amt can only be made by means of the class method; for example:
         //         > RobsAccount.WithdrawFunds (5)              ... #MARK Security is achieved through encapsulation.  
@@ -50,7 +52,7 @@ namespace FriendlyBank
 
         //  #MARK Constructor (YB 4.7) 
         
-        public StandardPersonalAcct(string inName, string inAddress, int inAge, decimal inBalance)        
+        public CustomerAccount(string inName, string inAddress, int inAge, decimal inBalance)        
         {
             // A constructor cannot throw a failure.  Data validation using exceptions is necessary.  YB 4.7.5
         
@@ -63,23 +65,13 @@ namespace FriendlyBank
         
             if (errorMessage != "")
             {
-                throw new Exception("StandardPersonalAcct construction failed: " + errorMessage);
+                throw new Exception("CustomerAccount construction failed: " + errorMessage);
             }
         
             account_name = inName;
             account_address = inAddress;
             balance_amt = inBalance;
         }
-        
-        public StandardPersonalAcct(string inName, string inAddress) :                         //  #MARK Constructor, overloaded 
-            this(inName, inAddress, 42, 1000)
-        {     // #MARK 'this' means "another constructor in this class".   YB 4.7.4
-              //    In this case, this() has done all that is needed.  So the body is empty.
-        }
-        
-        public StandardPersonalAcct(int inAge, decimal inBalance) :                        
-            this("unknown", "unknown", inAge, inBalance)
-        { }   
 
         public bool WithdrawFunds(decimal transaction_amt)
         {
