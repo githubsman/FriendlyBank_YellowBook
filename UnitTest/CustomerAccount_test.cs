@@ -36,35 +36,46 @@ namespace UnitTest
         public void Test_AccountAllowed_good()
         {
             // Arrange
-            decimal test_amt = 1100;
+            decimal test_amt = 30;
             int test_age = 11;
 
             // Act and Assert
             Assert.IsTrue(JuniorAccount.AccountAllowed(age: test_age, transaction_amt: test_amt));
         }
 
-        //[TestMethod]
-        //public void Test_AccountAllowed_bad_age()
-        //{
-        //    // Arrange
-        //    decimal test_amt = 5000;
-        //    int test_age = 16;
+        [TestMethod]
+        public void Test_AccountAllowed_bad_age()
+        {
+            // Arrange
+            decimal test_amt = 30;
+            int test_age = 8;
 
-        //    // Act and Assert      //#MARK named parameters, ex (transaction_amt: test_amt)
-        //    Assert.IsFalse(JuniorAccount.AccountAllowed(age: test_age, transaction_amt: test_amt));
-        //}
+            // Act and Assert    
+            Assert.IsFalse(JuniorAccount.AccountAllowed(age: test_age, transaction_amt: test_amt));
+        }
 
 
-        //    [TestMethod]
-        //    public void Test_GetBalance()
-        //    {
-        //        // Arrange
-        //        decimal test_amt = 30;
-        //        ICustomerAccount test = new JuniorAccount("Testy Junior", "Address", 15, test_amt);
-
-        //        // Act and Assert
-        //        Assert.AreEqual(test_amt, test.GetBalance());
-        //    }
+        [TestMethod]
+        public void Test_AccountAllowed_bad_amt()
+        {
+            // Arrange
+            decimal test_amt = 15;
+            int test_age = 11;
+        
+            // Act and Assert    
+            Assert.IsFalse(JuniorAccount.AccountAllowed(age: test_age, transaction_amt: test_amt));
+        }
+        
+        [TestMethod]
+        public void Test_GetBalance()
+        {
+            // Arrange
+            decimal test_amt = 60;
+            ICustomerAccount test = new JuniorAccount("Testy Junior", "Address", inAge: 15, inBalance: test_amt);
+        
+            // Act and Assert
+            Assert.AreEqual(test_amt, test.GetBalance());
+        }
     }
 
 
@@ -159,10 +170,7 @@ namespace UnitTest
          *      These tests (very correctly) require a working (test) bank account - 
          *      hopefully Yellow Book 4.7 will get us there!
          *              
-         */
 
-
-        /*
         [TestMethod]
         public void Debit_WithValidAmount_UpdatesBalance()
         {
@@ -170,13 +178,13 @@ namespace UnitTest
             double beginningBalance = 11.99;
             double transactionAmount = 4.55;
             double expectedBalance = 7.44;
-            BankAccount account = new BankAccount("Ms Unite Testy", beginningBalance);
+            ICustomerAccount test = new PersonalAccount("Ms Unite Testy", beginningBalance);
 
             // Act
-            account.Debit(transactionAmount);
+            test.WithdrawFunds(transactionAmount);
 
             // Assert
-            double actual = account.Balance;
+            decimal actual = test.GetBalance;
             Assert.AreEqual(expectedBalance, actual, 0.001, "Account not debited correctly");
         }
 
@@ -186,10 +194,10 @@ namespace UnitTest
             // Arrange
             double beginningBalance = 11.99;
             double transactionAmount = -2.00;
-            BankAccount account = new BankAccount("Ms Unite Testy", beginningBalance);
+            ICustomerAccount test = new PersonalAccount("Ms Unite Testy", beginningBalance);
 
             // Act and Assert
-            Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => account.Debit(transactionAmount));
+            Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => test.Debit(transactionAmount));
         }
 
         [TestMethod]
@@ -198,16 +206,16 @@ namespace UnitTest
             // Arrange
             double beginningBalance = 11.99;
             double transactionAmount = 100.00;
-            BankAccount account = new BankAccount("Ms Unite Testy", beginningBalance);
+            ICustomerAccount test = new PersonalAccount("Ms Unite Testy", beginningBalance);
 
             // Act and Assert in simpler form:
-            //      Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => account.Debit(transactionAmount));
+            //      Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => test.Debit(transactionAmount));
 
 
             // Act
             try
             {
-                account.Debit(transactionAmount);
+                test.Debit(transactionAmount);
             }
             catch (System.ArgumentOutOfRangeException e)
             {
@@ -223,19 +231,19 @@ namespace UnitTest
         {
             // Arrange
             double beginningBalance = 11.99;
-            ICustomerAccount account = new CustomerAccount("Ms Unite Testy", beginningBalance);
+            ICustomerAccount test = new CustomerAccount("Ms Unite Testy", beginningBalance);
 
             double transactionAmount = 4.00;
             double expectedBalance = 15.99;
 
             // Act
-            account.Credit(transactionAmount);
+            test.Credit(transactionAmount);
 
             // Assert
-            double actual = account.Balance;
+            double actual = test.GetBalance;
             Assert.AreEqual(expectedBalance, actual, 0.001, "Account not credited correctly");
         }
-        */
 
+        */
     }
 }

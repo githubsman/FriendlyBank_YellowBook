@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Security.Cryptography;
-
+﻿
 /* TODO:  add precise exceptions
  * https://learn.microsoft.com/en-us/visualstudio/test/walkthrough-creating-and-running-unit-tests-for-managed-code?view=vs-2022
  * */
@@ -24,14 +18,13 @@ namespace FriendlyBank
         // #MARK Variables stored in the class may be referred to as *members* or a *properties*. 
 
         //  See below about static properties. 
-        public static decimal interest_rate;
-        public static decimal min_starting_amt = 1000;
-        public static int min_age = 18;
 
+        public static int min_age = 18;             // We use CamelCase; 
+        public static decimal min_starting_amt = 1000;
+        
         internal string account_name;
         internal string account_address;
-        internal decimal balance_amt = 0;  // the decimal type is specifically designed for financial values
-
+        internal decimal balance_amt = 0;  // decimal is specifically for financials
 
         //  For a bank balance_amt, *defensive programming" is required.
         //
@@ -54,20 +47,6 @@ namespace FriendlyBank
         
         public CustomerAccount(string inName, string inAddress, int inAge, decimal inBalance)        
         {
-            // A constructor cannot throw a failure.  Data validation using exceptions is necessary.  YB 4.7.5
-        
-            string errorMessage = "";
-        
-            if (AccountAllowed(inBalance, inAge)==false)
-            {
-                errorMessage = errorMessage + "Minimal eligibility not met: " + inAge + ", " + inBalance;
-            }
-        
-            if (errorMessage != "")
-            {
-                throw new Exception("CustomerAccount construction failed: " + errorMessage);
-            }
-        
             account_name = inName;
             account_address = inAddress;
             balance_amt = inBalance;
@@ -106,7 +85,8 @@ namespace FriendlyBank
         //    (This makes obvious sense for the Main() method:  You need to be able 
         //     to start the program without first instantiating a class.
         //     It's also indispensible for libraries where a function should "just work".)
-        //  A static method can only consume static class members (again: interest_rate). YB 4.6.3.
+        //  A static method can only consume static class members.  YB 4.6.3.
+        //     private readonly decimal interest_rate   could serve as a class member. 
 
         public static bool AccountAllowed(decimal transaction_amt, int age)
         {
