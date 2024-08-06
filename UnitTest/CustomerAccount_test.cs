@@ -28,60 +28,10 @@ using FriendlyBank;
 
 namespace UnitTest
 {
-    [TestClass]
-    public class JuniorAccount_test
-    {
-
-        [TestMethod]
-        public void Test_AccountAllowed_good()
-        {
-            // Arrange
-            decimal test_amt = 110;
-            int test_age = 11;
-
-            // Act and Assert
-            Assert.IsTrue(JuniorAccount.AccountAllowed(age: test_age, transaction_amt: test_amt));
-        }
-
-        [TestMethod]
-        public void Test_AccountAllowed_bad_age()
-        {
-            // Arrange
-            decimal test_amt = 30;
-            int test_age = 8;
-
-            // Act and Assert    
-            Assert.IsFalse(JuniorAccount.AccountAllowed(age: test_age, transaction_amt: test_amt));
-        }
-
-
-        [TestMethod]
-        public void Test_AccountAllowed_bad_amt()
-        {
-            // Arrange
-            decimal test_amt = 15;
-            int test_age = 11;
-        
-            // Act and Assert    
-            Assert.IsFalse(JuniorAccount.AccountAllowed(age: test_age, transaction_amt: test_amt));
-        }
-        
-        [TestMethod]
-        public void Test_GetBalance()
-        {
-            // Arrange
-            decimal test_amt = 120;
-            ICustomerAccount test = new JuniorAccount("Testy Junior", "Address", inAge: 15, inBalance: test_amt);
-        
-            // Act and Assert
-            Assert.AreEqual(test_amt, test.GetBalance());
-        }
-    }
-
 
 
     [TestClass]
-    public class CustomerAccount_test
+    public class PersonalAccount_test
     {
         [TestMethod]
         public void Test_GetBalance()
@@ -110,25 +60,27 @@ namespace UnitTest
         public void Test_WithdrawFunds_bad_negative_bal()
         {
             // Arrange
-            decimal test_amt = 1050;
-            ICustomerAccount test = new PersonalAccount("Testy Customer", "Address", 20, test_amt);
+            decimal test_opening_balance = 1040;
+            decimal test_amt_bad = 1050;
+            ICustomerAccount test = new PersonalAccount("Testy Customer", "Address", 20, test_opening_balance);
 
             // Act and Assert
-            Assert.IsFalse(test.WithdrawFunds(test_amt + 1));
+            Assert.IsFalse(test.WithdrawFunds(test_amt_bad));
         }
 
         [TestMethod]
         public void Test_PayInFunds_good()
         {
             // Arrange
-            decimal test_amt = 1150;
-            ICustomerAccount test = new PersonalAccount("Testy Customer", "Address", 42, test_amt);
+            decimal test_opening_balance = 1040;
+            decimal test_amt = 1000;
+            ICustomerAccount test = new PersonalAccount("Testy Customer", "Address", 42, test_opening_balance);
 
             // Act
             test.PayInFunds(test_amt);
 
             // Assert
-            Assert.AreEqual(test.GetBalance(), test_amt * 2);
+            Assert.AreEqual(test.GetBalance(), test_opening_balance + test_amt);
         }
         
         [TestMethod]
@@ -139,7 +91,7 @@ namespace UnitTest
             int test_age = 20;
 
             // Act and Assert
-            Assert.IsTrue(CustomerAccount.AccountAllowed(age: test_age, transaction_amt: test_amt));
+            Assert.IsTrue(PersonalAccount.AccountAllowed(age: test_age, transaction_amt: test_amt));
         }
 
         [TestMethod]
@@ -164,7 +116,55 @@ namespace UnitTest
             ICustomerAccount test = new PersonalAccount("Testy Customer", "Address", test_age, test_amt);
         }
 
+        [TestClass]
+        public class JuniorAccount_test
+        {
 
+            [TestMethod]
+            public void Test_AccountAllowed_good()
+            {
+                // Arrange
+                decimal test_amt = 110;
+                int test_age = 11;
+
+                // Act and Assert
+                Assert.IsTrue(JuniorAccount.AccountAllowed(age: test_age, transaction_amt: test_amt));
+            }
+
+            [TestMethod]
+            public void Test_AccountAllowed_bad_age()
+            {
+                // Arrange
+                decimal test_amt = 30;
+                int test_age_bad = 8;
+
+                // Act and Assert    
+                Assert.IsFalse(JuniorAccount.AccountAllowed(age: test_age_bad, transaction_amt: test_amt));
+            }
+
+
+            [TestMethod]
+            public void Test_AccountAllowed_bad_amt()
+            {
+                // Arrange
+                decimal test_amt_bad = 15;
+                int test_age = 11;
+
+                // Act and Assert    
+                Assert.IsFalse(JuniorAccount.AccountAllowed(age: test_age, transaction_amt: test_amt_bad));
+            }
+
+            [TestMethod]
+            public void Test_GetBalance()
+            {
+                // Arrange
+                decimal test_amt = 120;
+                ICustomerAccount test = new JuniorAccount("Testy Junior", "Address", inAge: 15, inBalance: test_amt);
+
+                // Act and Assert
+                Assert.AreEqual(test_amt, test.GetBalance());
+            }
+        }
         /*  TODO  Reinstate use of precise exceptions. 
          * 
          *      These tests (very correctly) require a working (test) bank account - 
@@ -231,7 +231,7 @@ namespace UnitTest
         {
             // Arrange
             double beginningBalance = 11.99;
-            ICustomerAccount test = new CustomerAccount("Ms Unite Testy", beginningBalance);
+            ICustomerAccount test = new PersonalAccount("Ms Unite Testy", beginningBalance);
 
             double transactionAmount = 4.00;
             double expectedBalance = 15.99;

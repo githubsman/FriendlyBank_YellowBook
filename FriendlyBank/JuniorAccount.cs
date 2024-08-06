@@ -4,8 +4,8 @@ namespace FriendlyBank
     public class JuniorAccount : CustomerAccount, ICustomerAccount 
     {
         // YB 4.9  inherited account
-        public static int min_age = 10;       
-        public static decimal min_starting_amt = 100;
+        public new static int min_age = 10;       
+        public new static decimal min_starting_amt = 100;
 
         public JuniorAccount(string inName, string inAddress, int inAge, decimal inBalance) 
                         : base(inName, inAddress, inAge, inBalance)
@@ -40,7 +40,6 @@ namespace FriendlyBank
 
         public static new bool AccountAllowed(decimal transaction_amt, int age) 
         {
-            //min_age = 9; min_starting_amt = 20;
             return (transaction_amt >= min_starting_amt) && (age >= min_age);
         }
     }
