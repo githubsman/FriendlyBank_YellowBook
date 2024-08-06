@@ -7,7 +7,8 @@ namespace FriendlyBank
         // YB 4.9  inherited account
 
         // This class instantiates the abstract class CustomerAccount with no overrides. 
-
+        public static int min_age = 18;
+        public static decimal min_starting_amt = 1000;
 
 
         public PersonalAccount(string inName, string inAddress, int inAge, decimal inBalance) 

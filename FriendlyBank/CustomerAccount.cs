@@ -19,12 +19,12 @@ namespace FriendlyBank
 
         //  See below about static properties. 
 
-        public static int min_age = 18;             // We use CamelCase; 
-        public static decimal min_starting_amt = 1000;
+        public static int min_age;             // We use CamelCase; 
+        public static decimal min_starting_amt;
         
-        internal string account_name;
-        internal string account_address;
-        internal decimal balance_amt = 0;  // decimal is specifically for financials
+        private string account_name;
+        private string account_address;
+        private decimal balance_amt = 0;  // decimal is specifically for financials
 
         //  For a bank balance_amt, *defensive programming" is required.
         //

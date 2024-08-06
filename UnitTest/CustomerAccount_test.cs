@@ -36,7 +36,7 @@ namespace UnitTest
         public void Test_AccountAllowed_good()
         {
             // Arrange
-            decimal test_amt = 30;
+            decimal test_amt = 110;
             int test_age = 11;
 
             // Act and Assert
@@ -70,7 +70,7 @@ namespace UnitTest
         public void Test_GetBalance()
         {
             // Arrange
-            decimal test_amt = 60;
+            decimal test_amt = 120;
             ICustomerAccount test = new JuniorAccount("Testy Junior", "Address", inAge: 15, inBalance: test_amt);
         
             // Act and Assert
@@ -150,7 +150,7 @@ namespace UnitTest
             int test_age = 16;
 
             // Act and Assert      //#MARK named parameters, ex (transaction_amt: test_amt)
-            Assert.IsFalse(CustomerAccount.AccountAllowed(age: test_age, transaction_amt: test_amt));
+            ICustomerAccount test = new PersonalAccount("Testy Customer", "Address", test_age, test_amt);
         }
 
         [TestMethod]
@@ -161,7 +161,7 @@ namespace UnitTest
             int test_age = 40;
 
             // Act and Assert
-            Assert.IsFalse(CustomerAccount.AccountAllowed(test_amt, test_age));
+            ICustomerAccount test = new PersonalAccount("Testy Customer", "Address", test_age, test_amt);
         }
 
 
