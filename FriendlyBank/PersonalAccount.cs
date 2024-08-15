@@ -12,7 +12,7 @@ namespace FriendlyBank
 
 
         public PersonalAccount(string inName, string inAddress, int inAge, decimal inBalance) 
-                            : base(inName, inAddress, inAge, inBalance)
+                                : base(inName, inAddress, inAge, inBalance)
         {
             string errorMessage = "";
 
@@ -27,19 +27,19 @@ namespace FriendlyBank
             }
         }
 
-        //  #MARK Constructor, overloaded 
-        public PersonalAccount(string inName, string inAddress) 
-                        : base(inName, inAddress, 42, 1000)
-                // #MARK 'this' means "another constructor in this class".   YB 4.7.4
-                //    In this case, this() has done all that is needed.  So the body is empty.
+        public PersonalAccount(string inName, string inAddress) : base(inName, inAddress, 42, 1000)
+                // MARK 'this' means "another constructor in this class".   YB 4.7.4
+        { }     //    In this case, the body { } is empty because this() has done all that is needed.  
+
+        public PersonalAccount(int inAge, decimal inBalance) : base("unknown", "unknown", inAge, inBalance)
+        // MARK Constructor, overloaded.  It very usefully lets you check a potential account-holder
+        //   for eligibility without submitting a name or address. 
         { }
 
-        //public PersonalAccount(int inAge, decimal inBalance) 
-        //                : base("unknown", "unknown", inAge, inBalance)
-        //{ }
-
-        //FIXME  why is this not needed, as for JuniorAccount?  
-        // public static new bool AccountAllowed(decimal transaction_amt, int age)  {}
+        public static new bool AccountAllowed(decimal transaction_amt, int age)
+        {
+            return (transaction_amt >= min_starting_amt) && (age >= min_age);
+        }
 
     }
 }
